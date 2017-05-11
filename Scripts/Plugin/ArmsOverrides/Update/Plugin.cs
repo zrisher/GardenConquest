@@ -1,14 +1,11 @@
 ﻿using System.Reflection;
-using Sandbox.Common.ObjectBuilders;
-using Sandbox.Definitions;
-using Sandbox.Engine.Platform;
 using Sandbox.Game.World;
-using VRage.ObjectBuilders;
 using VRage.Plugins;
-using Rynchodon.AntennaRelay;
-using GardenConquest.ArmsOverrides;
 
-namespace GardenConquest.Update
+/// <summary>
+/// Just for UpdateManager
+/// </summary>
+namespace GardenConquest.ArmsOverrides.Update
 {
 	public class Plugin : IPlugin
 	{
@@ -20,23 +17,23 @@ namespace GardenConquest.Update
 
 		public void Update()
 		{
-			bool ready = MySession.Static != null && MySession.Static.Ready;
-
-			if (_loaded != ready)
+			if (MySession.Static != null && MySession.Static.Ready)
 			{
 				if (!_loaded)
-					CheckForArmsAndRegister();
-				_loaded = ready;
+				{
+					Load();
+					_loaded = true;
+				}
 			}
 		}
 
-		private static void CheckForArmsAndRegister()
+		private static void Load()
 		{
+			// TODO: Only load when steam mod is selected (i.e. get my own block for the below)
 			// if (!Game.IsDedicated && MyDefinitionManager.Static.GetCubeBlockDefinition(new SerializableDefinitionId(typeof(MyObjectBuilder_Cockpit), "Autopilot-Block_Large")) == null)
 			//	return;
 
-			Logger.DebugLog("Loading ARMS");
-            Logger.DebugLog("!!!! LastSeen.TicksPerTenthSecond is " + LastSeen.TicksPerTenthSecond);
+			Logger.DebugLog("Loading GardenConquest.ARMSOverrides");
 			MySession.Static.RegisterComponentsFromAssembly(Assembly.GetExecutingAssembly(), true);
 		}
 	}

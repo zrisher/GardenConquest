@@ -12,7 +12,6 @@ namespace GardenConquest.Update
 			foreach (var mod in MyAPIGateway.Session.Mods.Where(x => x.PublishedFileId == modId || x.Name == modName))
 			{
 				Logger.DebugLog($"Looking for component in Steam mod: FriendlyName: {mod.FriendlyName}, Name: {mod.Name}, Published ID: {mod.PublishedFileId}");
-
 				MySessionComponentBase component = Rynchodon.Mods.FindModSessionComponent(modName, modProject, modClass);
 				if (component == null)
 				{
@@ -21,7 +20,7 @@ namespace GardenConquest.Update
 				}
 				else
 				{
-					Logger.DebugLog($"Setting {ModFieldName} = {ModFieldValue} in {component}", Logger.severity.TRACE);
+					Logger.DebugLog($"Setting {ModFieldName} = {ModFieldValue} in {component}");
 					component.GetType().GetField(ModFieldName).SetValue(component, ModFieldValue);
 					return;
 				}
@@ -30,7 +29,7 @@ namespace GardenConquest.Update
 		}
 
 		[OnWorldLoad]
-		private static void Load()
+		private static void OnWorldLoad()
 		{
 			SetAttributeInModComponent(363880940, "GardenConquest", "Steam", "Notify", "PluginLoaded", true);
 		}

@@ -97,7 +97,7 @@
     </Compile>
     <Compile Include="ArmsOverrides\Update\Attributes.cs" />
     <Compile Include="Update\NotifyPluginLoaded.cs" />
-    <Compile Include="Update\Plugin.cs" />
+    <Compile Include="ArmsOverrides\Update\Plugin.cs" />
     <Compile Include="ArmsOverrides\Update\UpdateManager.cs" />
     <Compile Include="ArmsOverrides\Utility\Logger.cs" />
     <Compile Include="ArmsOverrides\Utility\MainLock.cs" />
