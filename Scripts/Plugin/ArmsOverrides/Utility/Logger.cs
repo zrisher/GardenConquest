@@ -14,7 +14,7 @@ using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRage.Utils;
 
-namespace GardenConquest
+namespace GardenConquest.ArmsOverrides
 {
 	/// <summary>
 	/// Generates log files to be read by GamutLogViewer.

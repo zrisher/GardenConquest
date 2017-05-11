@@ -3,31 +3,31 @@ using VRage.Game.Components;
 
 namespace Steam
 {
-    [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
-    public class Notify : MySessionComponentBase
-    {
+	[MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
+	public class Notify : MySessionComponentBase
+	{
+		private const string ModName = "GardenConquest";
 
-        private int updateCount = 0;
-        public bool HasNotified = false; // If name changes, change it in UpdateManager as well.
+		public bool PluginLoaded = false; // Plugin sets to true when it loads.
+		private bool HasNotified = false;
+		private int UpdateCount = 0;
 
-        /// <summary>
-        /// Notifies the player that they need to download Load-ARMS. Plugin will set HasNotified to true if it is running.
-        /// </summary>
-        public override void UpdateAfterSimulation()
-        {
-            if (HasNotified)
-                return;
+		/// <summary>
+		/// Notifies the player that they need to download Load-ARMS.
+		/// </summary>
+		public override void UpdateAfterSimulation()
+		{
+			if (PluginLoaded || HasNotified)
+				return;
 
-            updateCount++;
-            if (updateCount < 100 || MyAPIGateway.Session == null || MyAPIGateway.Utilities == null || MyAPIGateway.Input == null || !MyAPIGateway.Input.IsAnyKeyPress())
-                return;
+			UpdateCount++;
+			if (UpdateCount < 100 || MyAPIGateway.Session == null || MyAPIGateway.Utilities == null || MyAPIGateway.Input == null || !MyAPIGateway.Input.IsAnyKeyPress())
+				return;
 
-            HasNotified = true;
-
-            MyAPIGateway.Utilities.ShowNotification("GardenConquest needs Load-ARMS to run, see the steam page for download link", 60000);
-            MyAPIGateway.Session.UnregisterComponent(this);
-        }
-
-    }
+			HasNotified = true;
+			MyAPIGateway.Utilities.ShowNotification(ModName + " needs Load-ARMS to run. See its Steam page for download link.", 60000);
+			MyAPIGateway.Session.UnregisterComponent(this);
+		}
+	}
 }
 

@@ -8,7 +8,7 @@ using VRage.Game;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
 
-namespace GardenConquest
+namespace GardenConquest.ArmsOverrides
 {
 	/// <summary>
 	/// Obtains a shared lock on core thread while performing an action.

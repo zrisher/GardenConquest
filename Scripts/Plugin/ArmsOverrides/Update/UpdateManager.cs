@@ -24,7 +24,7 @@ using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 
-namespace GardenConquest.Update
+namespace GardenConquest.ArmsOverrides.Update
 {
 	/// <summary>
 	/// <para>Completely circumvents MyGameLogicComponent to avoid conflicts, and offers a bit more flexibility.</para>

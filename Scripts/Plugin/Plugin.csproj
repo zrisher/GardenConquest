@@ -95,17 +95,19 @@
     <Compile Include="..\Properties\VersionInfo - User.cs">
       <Link>Properties\VersionInfo - User.cs</Link>
     </Compile>
-    <Compile Include="Update\Attributes.cs" />
-    <Compile Include="Update\DisableNotifyDownload.cs" />
+    <Compile Include="ArmsOverrides\Update\Attributes.cs" />
+    <Compile Include="Update\NotifyPluginLoaded.cs" />
     <Compile Include="Update\Plugin.cs" />
-    <Compile Include="Update\UpdateManager.cs" />
-    <Compile Include="Utility\Logger.cs" />
-    <Compile Include="Utility\MainLock.cs" />
+    <Compile Include="ArmsOverrides\Update\UpdateManager.cs" />
+    <Compile Include="ArmsOverrides\Utility\Logger.cs" />
+    <Compile Include="ArmsOverrides\Utility\MainLock.cs" />
     <None Include="..\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utility\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>se_mod_builder pre-build</PreBuildEvent>

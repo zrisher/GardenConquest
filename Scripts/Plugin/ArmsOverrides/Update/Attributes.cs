@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Sandbox.ModAPI;
 
-namespace GardenConquest
+namespace GardenConquest.ArmsOverrides
 {
 	public interface Ordered
 	{
