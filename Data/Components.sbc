@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Components>
+  	<Component>
+      <Id>
+        <TypeId>Component</TypeId>
+        <SubtypeId>GCLicenseCivilian</SubtypeId>
+      </Id>
+      <DisplayName>Civilian License</DisplayName>
+      <Icon>Textures\Icons\license-128.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>0.5</Y>
+        <Z>0.4</Z>
+      </Size>
+      <Mass>2</Mass>
+      <Volume>2</Volume>
+      <Model>Models\Components\radio_communication_components_component.mwm</Model>
+      <MaxIntegrity>1</MaxIntegrity>
+      <DropProbability>0.8</DropProbability>
+    </Component>
+    <Component>
+      <Id>
+        <TypeId>Component</TypeId>
+        <SubtypeId>GCLicenseIndustrial</SubtypeId>
+      </Id>
+      <DisplayName>Industrial License</DisplayName>
+      <Icon>Textures\Icons\license-128.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>0.5</Y>
+        <Z>0.4</Z>
+      </Size>
+      <Mass>2</Mass>
+      <Volume>2</Volume>
+      <Model>Models\Components\radio_communication_components_component.mwm</Model>
+      <MaxIntegrity>1</MaxIntegrity>
+      <DropProbability>0.8</DropProbability>
+    </Component>
+    <Component>
+      <Id>
+        <TypeId>Component</TypeId>
+        <SubtypeId>GCLicenseMilitary</SubtypeId>
+      </Id>
+      <DisplayName>Military License</DisplayName>
+      <Icon>Textures\Icons\license-128.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>0.5</Y>
+        <Z>0.4</Z>
+      </Size>
+      <Mass>2</Mass>
+      <Volume>2</Volume>
+      <Model>Models\Components\radio_communication_components_component.mwm</Model>
+      <MaxIntegrity>1</MaxIntegrity>
+      <DropProbability>0.8</DropProbability>
+    </Component>
+    <Component>
+      <Id>
+        <TypeId>Component</TypeId>
+        <SubtypeId>GCLicenseTechnology</SubtypeId>
+      </Id>
+      <DisplayName>Technology License</DisplayName>
+      <Icon>Textures\Icons\license-128.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>0.5</Y>
+        <Z>0.4</Z>
+      </Size>
+      <Mass>2</Mass>
+      <Volume>2</Volume>
+      <Model>Models\Components\radio_communication_components_component.mwm</Model>
+      <MaxIntegrity>1</MaxIntegrity>
+      <DropProbability>0.8</DropProbability>
+    </Component>
+  </Components>
+</Definitions>

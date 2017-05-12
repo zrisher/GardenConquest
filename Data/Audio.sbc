@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcGcDecaySound</SubtypeId>
+      </Id>
+      <!--<Category>HUD</Category>-->
+      <Volume>1</Volume>
+      <MaxDistance>100</MaxDistance>
+      <VolumeVariation>1</VolumeVariation>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\decay_creak_1.xwm</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\decay_creak_2.xwm</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\decay_creak_3.xwm</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\decay_creak_low_1.xwm</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\decay_creak_low_2.xwm</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>RealGcDecaySound</SubtypeId>
+      </Id>
+      <!--<Category>HUD</Category>-->
+      <Volume>1</Volume>
+      <MaxDistance>250</MaxDistance>
+      <VolumeVariation>0.9</VolumeVariation>
+      <PitchVariation>10</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\decay_creak_low_1.xwm</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\decay_creak_low_2.xwm</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+  </Sounds>
+</Definitions>
