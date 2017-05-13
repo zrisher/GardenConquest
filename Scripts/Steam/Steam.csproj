@@ -7,8 +7,8 @@
     <ProjectGuid>{5A93C0CA-1DD4-4D0E-9EEB-0021B40D6BCF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Steam</RootNamespace>
-    <AssemblyName>Steam</AssemblyName>
+    <RootNamespace>GardenConquest</RootNamespace>
+    <AssemblyName>GardenConquest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
