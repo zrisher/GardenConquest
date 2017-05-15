@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ARMS">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\Load-ARMS\mods\Rynchodon.ARMS\ARMS.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\SpaceEngineersPluginLoader\plugin\Rynchodon.ARMS\ARMS.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.Common">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Common.dll</HintPath>
@@ -195,9 +195,20 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>se_mod_builder pre-build</PreBuildEvent>
+    <PreBuildEvent>SEModBuilder git-version
+</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>se_mod_builder post-build --env $(ConfigurationName)</PostBuildEvent>
+    <PostBuildEvent>SEModBuilder kill-se
+SEModBuilder build-models
+SEModBuilder distribute-steam
+
+if $(ConfigurationName) == release ( 
+  PluginManager ..\..\..\..\..\plugin.json publish=True
+) else (
+  PluginManager ..\..\..\..\..\plugin.json 
+  SEModBuilder start-se
+)
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

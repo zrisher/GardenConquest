@@ -1,0 +1,20 @@
+{
+  "author": "zrisher",
+  "files": [
+    {
+      "source": "GardenConquest.dll"
+    }
+  ],
+  "release": {
+    "body": "Working on SEPL/SEPC/SEPB",
+    "draft": true,
+    "prerelease": true
+  },
+  "repository": "GardenConquest",
+  "requires": [
+    {
+      "author": "Rynchodon",
+      "repository": "ARMS"
+    }
+  ]
+}
