@@ -1,5 +1,25 @@
 # Garden Conquest - Player Guide
 
+## Installation
+Garden Conquest is distributed in two parts. Both are required:
+
+### Steam
+Simply navigate to
+[the mod's steam page](http://steamcommunity.com/sharedfiles/filedetails/?id=450540708)
+and click "Subscribe".
+
+### SEPL
+If you don't already have
+[Space Engineers Plugin Loader (SEPL)](https://github.com/Rynchodon/SpaceEngineersPluginLoader)
+installed, follow its installation instructions.
+
+Once SEPL is installed, run it and ensure these plugins are added and enabled:
+
+Author    | Repository
+--------- | ------------
+Rynchodon | SEPC
+zrisher   | GardenConquest2
+
 ## Gameplay Concepts
 
 ### Ship Classification
