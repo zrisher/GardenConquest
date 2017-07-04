@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using Sandbox.ModAPI;
 using VRage.Game.Components;
-using GardenConquest.ArmsOverrides;
+using SEPC;
 
 namespace GardenConquest.Update
 {
 	static class NotifyPluginLoaded
 	{
+		/*
 		private static void SetAttributeInModComponent(ulong modId, string modName, string modScriptsFolder, string componentTypeName, string ModFieldName, object ModFieldValue)
 		{
 			foreach (var mod in MyAPIGateway.Session.Mods.Where(x => x.PublishedFileId == modId || x.Name == modName))
@@ -33,5 +34,6 @@ namespace GardenConquest.Update
 		{
 			SetAttributeInModComponent(363880940, "GardenConquest", "Steam", "GardenConquest.Notify", "PluginLoaded", true);
 		}
+		*/
 	}
 }

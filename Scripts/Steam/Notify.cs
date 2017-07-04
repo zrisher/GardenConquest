@@ -5,7 +5,7 @@ namespace GardenConquest
 {
 	/// <summary>
 	/// Loads through the SE steam mod system.
-	/// SEPL plugins mark it when they've loaded.
+	/// Plugin marks it once loaded.
 	/// Notifies the player if the plugin never loaded.
 	/// </summary>
 	[MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
@@ -14,26 +14,25 @@ namespace GardenConquest
 		private const string ModName = "GardenConquest";
 		private const int NotifyDuration = 60000;
 
-		// Plugin sets to true when it loads.
-		public bool PluginLoaded = false;
+		// Plugin sets to true once loaded
+		public bool PluginLoaded;
 
-		private bool HasNotified = false;
-		private int UpdateCount = 0;
+		private bool NoticeRaised;
+		private int UpdateCount;
 
 		public override void UpdateAfterSimulation()
 		{
-			if (HasNotified)
+			if (NoticeRaised)
 				return;
 
 			if (PluginLoaded)
 			{
 				// TODO remove when working
 				{
-					HasNotified = true;
-					MyAPIGateway.Utilities.ShowNotification(ModName + " successfully notified .", NotifyDuration);     
+					MyAPIGateway.Utilities.ShowNotification(ModName + " successfully notified .", NotifyDuration);
+					NoticeRaised = true;
 					MyAPIGateway.Session.UnregisterComponent(this);
 				}
-
 				return;
 			}
 
@@ -43,8 +42,8 @@ namespace GardenConquest
 				MyAPIGateway.Input == null || !MyAPIGateway.Input.IsAnyKeyPress())
 				return;
 
-			HasNotified = true;
-			MyAPIGateway.Utilities.ShowNotification(ModName + " needs SEPL to run. See its Steam page for download link.", NotifyDuration);
+			MyAPIGateway.Utilities.ShowNotification(ModName + " needs SEPL to run. See the User Guide on its Steam page.", NotifyDuration);
+			NoticeRaised = true;
 			MyAPIGateway.Session.UnregisterComponent(this);
 		}
 	}

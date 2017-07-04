@@ -13,11 +13,10 @@ If you don't already have
 [Space Engineers Plugin Loader (SEPL)](https://github.com/Rynchodon/SpaceEngineersPluginLoader)
 installed, follow its installation instructions.
 
-Once SEPL is installed, run it and ensure these plugins are added and enabled:
+Once SEPL is installed, run it and ensure this line exists and is enabled:
 
 Author    | Repository
 --------- | ------------
-Rynchodon | SEPC
 zrisher   | GardenConquest2
 
 ## Gameplay Concepts

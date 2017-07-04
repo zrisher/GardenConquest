@@ -34,14 +34,14 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ARMS">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\SpaceEngineersPluginLoader\plugin\Rynchodon.ARMS\ARMS.dll</HintPath>
-    </Reference>
     <Reference Include="Sandbox.Common">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Common.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.Game">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="SEPC">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\SpaceEngineersPluginLoader\plugin\Rynchodon.SEPC\SEPC.dll</HintPath>
     </Reference>
     <Reference Include="SpaceEngineers.Game">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.Game.dll</HintPath>
@@ -95,7 +95,6 @@
     <Compile Include="..\Properties\VersionInfo - User.cs">
       <Link>Properties\VersionInfo - User.cs</Link>
     </Compile>
-    <Compile Include="ArmsOverrides\Update\Attributes.cs" />
     <Compile Include="Old\GardenConquest\App\BlockTaxonomy\BlockType.cs" />
     <Compile Include="Old\GardenConquest\App\BlockTaxonomy\BlockTypeCategory.cs" />
     <Compile Include="Old\GardenConquest\App\GridOwnership\Fleet.cs" />
@@ -181,18 +180,13 @@
     <Compile Include="Old\GardenConquest\World\Grids\LootCrate.cs" />
     <Compile Include="Old\Main.cs" />
     <Compile Include="Old\ModInfo.cs" />
+    <Compile Include="Plugin.cs" />
     <Compile Include="Update\NotifyPluginLoaded.cs" />
-    <Compile Include="ArmsOverrides\Update\Plugin.cs" />
-    <Compile Include="ArmsOverrides\Update\UpdateManager.cs" />
-    <Compile Include="ArmsOverrides\Utility\Logger.cs" />
-    <Compile Include="ArmsOverrides\Utility\MainLock.cs" />
     <None Include="..\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utility\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>SEModBuilder git-version
