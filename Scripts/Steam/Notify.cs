@@ -1,22 +1,22 @@
 ﻿using Sandbox.ModAPI;
+using VRage.Game;
 using VRage.Game.Components;
 
-namespace GardenConquest
+namespace GC
 {
 	/// <summary>
 	/// Loads through the SE steam mod system.
-	/// Plugin marks it once loaded.
-	/// Notifies the player if the plugin never loaded.
+	/// Plugin sets PluginLoaded = true via reflection once loaded.
+	/// Notifies the player of the plugin's load status.
 	/// </summary>
 	[MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
 	public class Notify : MySessionComponentBase
 	{
+		// Mod-specific configuration
 		private const string ModName = "GardenConquest";
-		private const int NotifyDuration = 60000;
+		private const bool NotifyOnSuccess = true;
 
-		// Plugin sets to true once loaded
-		public bool PluginLoaded;
-
+		private bool PluginLoaded;
 		private bool NoticeRaised;
 		private int UpdateCount;
 
@@ -27,12 +27,11 @@ namespace GardenConquest
 
 			if (PluginLoaded)
 			{
-				// TODO remove when working
-				{
-					MyAPIGateway.Utilities.ShowNotification(ModName + " successfully notified .", NotifyDuration);
-					NoticeRaised = true;
-					MyAPIGateway.Session.UnregisterComponent(this);
-				}
+				if (NotifyOnSuccess)
+					MyAPIGateway.Utilities.ShowNotification(ModName + " loaded.", 6000, MyFontEnum.Green);
+
+				NoticeRaised = true;
+				MyAPIGateway.Session.UnregisterComponent(this);
 				return;
 			}
 
@@ -42,7 +41,7 @@ namespace GardenConquest
 				MyAPIGateway.Input == null || !MyAPIGateway.Input.IsAnyKeyPress())
 				return;
 
-			MyAPIGateway.Utilities.ShowNotification(ModName + " needs SEPL to run. See the User Guide on its Steam page.", NotifyDuration);
+			MyAPIGateway.Utilities.ShowNotification(ModName + " failed to load. Ensure you've installed SEPL.", 60000, MyFontEnum.Red);
 			NoticeRaised = true;
 			MyAPIGateway.Session.UnregisterComponent(this);
 		}

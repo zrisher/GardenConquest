@@ -1,50 +1,37 @@
-﻿//using SEPC.Components;
-using System;
-using VRage.Plugins;
-using VRage.Utils;
+﻿using System;
 
-namespace GardenConquest
+using VRage.Plugins;
+
+using SEPC.Components;
+using SEPC.Diagnostics;
+using SEPC.Logging;
+
+namespace GC
 {
 	/// <summary>
 	/// Loaded with the game and persists until game is closed.
-	/// Registers our LogicComponents.
+	/// Registers our mod with SEPC.
 	/// </summary>
 	public class Plugin : IPlugin
 	{
 		public void Dispose()
 		{
-			MyLog.Default.WriteLine("GC.Plugin.Dispose()");
+			Logger.DebugLog("GC.Plugin.Dispose()");
 		}
 
 		public void Init(object gameInstance)
 		{
-			MyLog.Default.WriteLine("GC.Plugin.Init()");
-			/*
-			// TODO remove this try
-			try
-			{
-				// Tell the Registrar if we have DEBUG defined
-				ComponentRegistrar.DebugConditional();
+			// Register our compilation symbol state
+			SymbolRegistrar.SetDebugIfDefined();
+			SymbolRegistrar.SetProfileIfDefined();
 
-				// Tell the Registrar if we have PROFILE defined
-				ComponentRegistrar.ProfileConditional();
+			Logger.DebugLog("GC.Plugin.Init()");
 
-				// Tell the Registrar about all our components
-				ComponentRegistrar.AddComponents();
-
-				// Tell the Registrar which group to load automatically
-				ComponentRegistrar.LoadOnInit((int)Loader.Groups.Loader);
-			}
-			catch (Exception error)
-			{
-				Logger.DebugLog($"Error registering components: {error}");
-			}
-			*/
+			// Register our SEPC-managed SessionComponents
+			ComponentRegistrar.AddComponents();
+			ComponentRegistrar.LoadOnInit(0);
 		}
 
-		public void Update()
-		{
-
-		}
+		public void Update() { }
 	}
 }

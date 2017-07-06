@@ -178,10 +178,9 @@
     <Compile Include="Old\GardenConquest\World\Grids\EnforcedGrid.cs" />
     <Compile Include="Old\GardenConquest\World\Grids\GridUpkeepManager.cs" />
     <Compile Include="Old\GardenConquest\World\Grids\LootCrate.cs" />
-    <Compile Include="Old\Main.cs" />
     <Compile Include="Old\ModInfo.cs" />
     <Compile Include="Plugin.cs" />
-    <Compile Include="Update\NotifyPluginLoaded.cs" />
+    <Compile Include="Session.cs" />
     <None Include="..\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </None>
