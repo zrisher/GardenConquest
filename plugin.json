@@ -6,11 +6,11 @@
     }
   ],
   "release": {
-    "body": "Working on SEPL/SEPC",
-    "draft": true,
-    "prerelease": true
+    "body": "Basic SEPL/SEPC integration. Notifies.",
+    "draft": false,
+    "prerelease": false
   },
-  "repository": "GardenConquest2",
+  "repository": "GardenConquest",
   "requires": [
     {
       "author": "Rynchodon",
