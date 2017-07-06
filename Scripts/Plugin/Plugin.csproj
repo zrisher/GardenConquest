@@ -196,7 +196,7 @@
 SEModBuilder build-models
 SEModBuilder distribute-steam
 
-if $(ConfigurationName) == release ( 
+if $(ConfigurationName) == Release ( 
   PluginManager ..\..\..\..\..\plugin.json publish=True
 ) else (
   PluginManager ..\..\..\..\..\plugin.json 
