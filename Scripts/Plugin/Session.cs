@@ -10,7 +10,7 @@ namespace GC
         public Session()
         {
             // Only load if the steam version has been loaded too.
-            var steamComponent = ReflectionHelper.FindModSessionComponent("GardenConquest", 363880940, "Steam", "GC.Notify");
+            var steamComponent = ReflectionHelper.FindModSessionComponent("GardenConquest", 450540708, "Steam", "GC.Notify");
             if (steamComponent == null)
                 return;
 
