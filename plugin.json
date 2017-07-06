@@ -6,7 +6,7 @@
     }
   ],
   "release": {
-    "body": "Basic SEPL/SEPC integration. Notifies.",
+    "body": "Fix mod id.",
     "draft": false,
     "prerelease": false
   },
