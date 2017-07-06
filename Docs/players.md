@@ -17,7 +17,10 @@ Once SEPL is installed, run it and ensure this line exists and is enabled:
 
 Author    | Repository
 --------- | ------------
-zrisher   | GardenConquest2
+zrisher   | GardenConquest
+
+
+<!---
 
 ## Gameplay Concepts
 
@@ -112,3 +115,5 @@ Use these (plus any existing ships that haven't yet been removed) to capture
 
 You can use those to build bigger and better Hull Classifiers. These will
 allow you to place and keep more blocks
+
+--->
