@@ -11,7 +11,8 @@ and click "Subscribe".
 ### SEPL
 If you don't already have
 [Space Engineers Plugin Loader (SEPL)](https://github.com/Rynchodon/SpaceEngineersPluginLoader)
-installed, follow its installation instructions.
+installed, follow its installation instructions. 
+Ensure you've completed the section "Launch Without Plugin Manager" by setting SE's launch options in Steam.
 
 Once SEPL is installed, run it and ensure this line exists and is enabled:
 
