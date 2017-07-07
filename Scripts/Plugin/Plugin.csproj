@@ -26,7 +26,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -95,33 +96,33 @@
     <Compile Include="..\Properties\VersionInfo - User.cs">
       <Link>Properties\VersionInfo - User.cs</Link>
     </Compile>
-    <Compile Include="Old\GardenConquest\App\BlockTaxonomy\BlockType.cs" />
-    <Compile Include="Old\GardenConquest\App\BlockTaxonomy\BlockTypeCategory.cs" />
-    <Compile Include="Old\GardenConquest\App\GridOwnership\Fleet.cs" />
-    <Compile Include="Old\GardenConquest\App\GridOwnership\GridOwner.cs" />
-    <Compile Include="Old\GardenConquest\App\GridTaxonomy\Condition.cs" />
-    <Compile Include="Old\GardenConquest\App\GridTaxonomy\ConditionValues\ConditionValueBase.cs" />
-    <Compile Include="Old\GardenConquest\App\GridTaxonomy\ConditionValues\CountValue.cs" />
-    <Compile Include="Old\GardenConquest\App\GridTaxonomy\ConditionValues\GridTypeValue.cs" />
-    <Compile Include="Old\GardenConquest\App\GridTaxonomy\Node.cs" />
-    <Compile Include="Old\GardenConquest\App\LootSpawning\ControlPoint.cs" />
-    <Compile Include="Old\GardenConquest\App\LootSpawning\LootCrateCount.cs" />
-    <Compile Include="Old\GardenConquest\App\LootSpawning\LootCrateType.cs" />
-    <Compile Include="Old\GardenConquest\App\LootSpawning\LootDrop.cs" />
+    <Compile Include="App\BlockTaxonomy\BlockType.cs" />
+    <Compile Include="App\BlockTaxonomy\BlockTypeCategory.cs" />
+    <Compile Include="App\GridOwnership\Fleet.cs" />
+    <Compile Include="App\GridOwnership\GridOwner.cs" />
+    <Compile Include="App\GridTaxonomy\Condition.cs" />
+    <Compile Include="App\GridTaxonomy\ConditionValues\ConditionValueBase.cs" />
+    <Compile Include="App\GridTaxonomy\ConditionValues\CountValue.cs" />
+    <Compile Include="App\GridTaxonomy\ConditionValues\GridTypeValue.cs" />
+    <Compile Include="App\GridTaxonomy\Node.cs" />
+    <Compile Include="App\LootSpawning\ControlPoint.cs" />
+    <Compile Include="App\LootSpawning\LootCrateCount.cs" />
+    <Compile Include="App\LootSpawning\LootCrateType.cs" />
+    <Compile Include="App\LootSpawning\LootDrop.cs" />
     <Compile Include="Old\GardenConquest\Commands.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\BlockTaxonomy\BlockTypeCategoryDefinition.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\BlockTaxonomy\BlockTypeDefinition.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\GridTaxonomy\ConditionDefinition.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\GridTaxonomy\ConditionValueDefinition.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\GridTaxonomy\GridType.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\GridTaxonomy\NodeDefinition.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\GridTaxonomy\OperatorType.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\GridTaxonomy\StoredValueType.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\LootSpawning\ControlPointDefinition.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\LootSpawning\LootCrateCountDefinition.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\LootSpawning\LootCrateTypeDefinition.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\LootSpawning\LootDropDefinition.cs" />
-    <Compile Include="Old\GardenConquest\Definitions\SettingsDefinition.cs" />
+    <Compile Include="Definitions\BlockTaxonomy\BlockTypeCategoryDefinition.cs" />
+    <Compile Include="Definitions\BlockTaxonomy\BlockTypeDefinition.cs" />
+    <Compile Include="Definitions\GridTaxonomy\ConditionDefinition.cs" />
+    <Compile Include="Definitions\GridTaxonomy\ConditionValueDefinition.cs" />
+    <Compile Include="Definitions\GridTaxonomy\GridType.cs" />
+    <Compile Include="Definitions\GridTaxonomy\NodeDefinition.cs" />
+    <Compile Include="Definitions\GridTaxonomy\OperatorType.cs" />
+    <Compile Include="Definitions\GridTaxonomy\StoredValueType.cs" />
+    <Compile Include="Definitions\LootSpawning\ControlPointDefinition.cs" />
+    <Compile Include="Definitions\LootSpawning\LootCrateCountDefinition.cs" />
+    <Compile Include="Definitions\LootSpawning\LootCrateTypeDefinition.cs" />
+    <Compile Include="Definitions\LootSpawning\LootDropDefinition.cs" />
+    <Compile Include="Definitions\SettingsDefinition.cs" />
     <Compile Include="Old\GardenConquest\Messages\Archive\Messages\Requests\Old\BaseRequest.cs" />
     <Compile Include="Old\GardenConquest\Messages\Archive\Messages\Requests\Old\ChangeSettingRequest.cs" />
     <Compile Include="Old\GardenConquest\Messages\Archive\Messages\Requests\Old\ConcealedGridsRequest.cs" />
@@ -197,7 +198,8 @@ SEModBuilder build-models
 SEModBuilder distribute-steam
 
 if $(ConfigurationName) == Release ( 
-  PluginManager ..\..\..\..\..\plugin.json publish=True
+  PluginManager ..\..\..\..\..\plugin.json   publish=True
+  SEModBuilder start-se
 ) else (
   PluginManager ..\..\..\..\..\plugin.json 
   SEModBuilder start-se

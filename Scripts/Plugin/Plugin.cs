@@ -1,4 +1,6 @@
+using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 using VRage.Plugins;
 
@@ -14,22 +16,36 @@ namespace GC
     /// </summary>
     public class Plugin : IPlugin
     {
+        private Logable Log = new Logable("GC");
+
         public void Dispose()
         {
-            Logger.DebugLog("GC.Plugin.Dispose()");
+            Log.Entered();
         }
 
+        /// <remarks>
+        /// Skips inlining so the registrars correctly detect calling assembly.
+        /// </remarks>
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public void Init(object gameInstance)
         {
-            // Register our compilation symbol state
-            SymbolRegistrar.SetDebugIfDefined();
-            SymbolRegistrar.SetProfileIfDefined();
+            Log.Entered();
 
-            Logger.DebugLog("GC.Plugin.Init()");
+            try
+            {
+                // Register our compilation symbol state
+                SymbolRegistrar.SetDebugIfDefined();
+                SymbolRegistrar.SetProfileIfDefined();
 
-            // Register our SEPC-managed SessionComponents
-            ComponentRegistrar.AddComponents(Assembly.GetExecutingAssembly());
-            ComponentRegistrar.LoadOnInit(0, Assembly.GetExecutingAssembly());
+                // Register our SEPC-managed SessionComponents
+                ComponentRegistrar.AddComponents();
+                ComponentRegistrar.LoadOnInit(0);
+            }
+            catch (Exception error)
+            {
+                Log.Error(error);
+            }
+
         }
 
         public void Update() { }

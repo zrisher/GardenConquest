@@ -7,6 +7,8 @@ namespace GC
     [IsSessionComponent]
     class Session
     {
+        private Logable Log = new Logable("GC");
+
         public Session()
         {
             // Only load if the steam version has been loaded too.
@@ -14,15 +16,14 @@ namespace GC
             if (steamComponent == null)
                 return;
 
-            Logger.Log("GC steam component found, loading mod.");
+            Log.Log("GC steam component found, loading mod.");
 
-            Logger.TraceLog("Registering session components");
-
+            Log.Trace("Registering session components abcd");
             //UpdateManager.RegisterSessionComponent(new ServerTestSession());
             //UpdateManager.RegisterSessionComponent(new ServerSession(), RunLocation.Server);
             //UpdateManager.RegisterSessionComponent(new ClientSession(), RunLocation.Client);
 
-            Logger.TraceLog("Registering entity components");
+            Log.Trace("Registering entity components");
             //UpdateManager.RegisterEntityComponent(
             //    ((e) => { return new EnforcedGrid(e); }),
             //    typeof(MyObjectBuilder_CubeGrid),

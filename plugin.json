@@ -5,11 +5,6 @@
       "source": "GardenConquest.dll"
     }
   ],
-  "release": {
-    "body": "Fix mod id.",
-    "draft": false,
-    "prerelease": false
-  },
   "repository": "GardenConquest",
   "requires": [
     {

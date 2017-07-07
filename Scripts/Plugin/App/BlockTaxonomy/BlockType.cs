@@ -1,28 +1,18 @@
-﻿/*
-
+/*
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
-using Sandbox.Definitions; // from Sandbox.Game.dll
-using Sandbox.Game.Entities; // from Sandbox.Game.dll
-using Sandbox.ModAPI;
-
-using VRage; // from VRage.dll and VRage.Library.dll
-using VRage.Game; // from VRage.Game.dll
-using VRage.Game.Entity; // from VRage.Game.dll
-using VRage.Game.ModAPI; // from VRage.Game.dll
-using VRage.ModAPI; // from VRage.Game.dll
-using VRage.ObjectBuilders;
+using VRage;
+using VRage.Game.ModAPI;
 
 using SEGarden.Definitions;
-using SEGarden.Logging;
-using SEGarden.Extensions;
 using SEGarden.World.Inventory;
 
 using GC.Definitions.BlockTaxonomy;
+
+using SEPC.Extensions;
+using SEPC.Logging;
 
 
 namespace GC.App.BlockTaxonomy {
@@ -34,7 +24,7 @@ namespace GC.App.BlockTaxonomy {
     [XmlType("BlockType")]
     public class BlockType {
 
-        static readonly Logger Log = new Logger("GC.World.Blocks.BlockType");
+        static readonly Logable Log = new Logable("GC.World.Blocks.BlockType");
 
         public readonly String Name;
         public readonly MyFixedPoint CostMultiplier;
@@ -152,12 +142,8 @@ namespace GC.App.BlockTaxonomy {
             return false;
         }
 
-        public String ToString() {
-            return String.Format(
-                "{0} - CostX: {1}, EnabledPri: {2}, BlockNames: {3}", 
-                Name, CostMultiplier, EnablePriority, 
-                String.Join(", ", SubtypePartialNames)
-            );
+        public override String ToString() {
+            return $"{Name} - CostX: {CostMultiplier}, EnabledPri: {EnablePriority}, BlockNames: {String.Join(", ", SubtypePartialNames)}";
         }
 
 
