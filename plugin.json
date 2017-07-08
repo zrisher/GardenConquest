@@ -6,6 +6,10 @@
     }
   ],
   "repository": "GardenConquest",
+  "release": {
+    "body": "Reflection and logging fixes",
+    "prerelease": false
+  },
   "requires": [
     {
       "author": "Rynchodon",
