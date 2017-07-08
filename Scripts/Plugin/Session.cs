@@ -2,6 +2,8 @@ using SEPC.Components.Attributes;
 using SEPC.Logging;
 using SEPC.Reflection;
 
+using VRage.Sync;
+
 namespace GC
 {
     [IsSessionComponent]
