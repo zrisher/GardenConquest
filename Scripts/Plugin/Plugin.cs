@@ -23,10 +23,6 @@ namespace GC
             Log.Entered();
         }
 
-        /// <remarks>
-        /// Skips inlining so the registrars correctly detect calling assembly.
-        /// </remarks>
-        [MethodImpl(MethodImplOptions.NoInlining)]
         public void Init(object gameInstance)
         {
             Log.Entered();
@@ -38,8 +34,8 @@ namespace GC
                 SymbolRegistrar.SetProfileIfDefined();
 
                 // Register our SEPC-managed SessionComponents
-                ComponentRegistrar.AddComponents();
-                ComponentRegistrar.LoadOnInit(0);
+                ComponentRegistrar.AddComponents(Assembly.GetExecutingAssembly());
+                ComponentRegistrar.LoadOnInit(0, Assembly.GetExecutingAssembly());
             }
             catch (Exception error)
             {
