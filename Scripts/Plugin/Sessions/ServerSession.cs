@@ -48,7 +48,7 @@ using SEPC.Network.Messaging;
 
 namespace GC.Sessions {
 
-	[IsSessionComponent(RunLocation.Client, groupId: (int)Session.Groups.Sessions, order: RegistrationOrder)]
+	[IsSessionComponent(RunLocation.Server, groupId: (int)Session.Groups.Sessions, order: RegistrationOrder)]
 	public class ServerSession {
 
 		public const int RegistrationOrder = 0;
@@ -81,8 +81,6 @@ namespace GC.Sessions {
             Log.Trace("Initializing Server Session");
 
 			RegisterMessageHandlers();
-
-
 
             ////if (ModInfo.DebugMode && !RunTests()) {
             ////    Log.Info("Tests failed, aborting init.", "Initialize");
