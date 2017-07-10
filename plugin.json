@@ -8,10 +8,9 @@
   "repository": "GardenConquest",
   "release": {
     "body_lines": [
-      "Reflection and logging fixes",
-	  "Initial networking",
+      "Debugging initial networking",
     ],
-    "prerelease": true
+    "prerelease": false
   },
   "requires": [
     {
