@@ -25,10 +25,13 @@ namespace GC
 
         public void Init(object gameInstance)
         {
-            Log.Entered();
-
             try
             {
+                var assembly = Assembly.GetExecutingAssembly();
+                var version = assembly.GetName().Version;
+
+                Log.Log("Loading Plugin for GC version " + version);
+
                 // Register our compilation symbol state
                 SymbolRegistrar.SetDebugIfDefined();
                 SymbolRegistrar.SetProfileIfDefined();
