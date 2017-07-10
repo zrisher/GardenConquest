@@ -200,7 +200,7 @@ if $(ConfigurationName) == Release (
   PluginManager ..\..\..\..\..\plugin.json   publish=True
   SEModBuilder start-se
 ) else (
-  PluginManager ..\..\..\..\..\plugin.json 
+  PluginManager ..\..\..\..\..\plugin.json publish=True
   SEModBuilder start-se
 )
 </PostBuildEvent>
