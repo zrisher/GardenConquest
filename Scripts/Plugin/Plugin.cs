@@ -35,7 +35,7 @@ namespace GC
 
                 // Register our SEPC-managed SessionComponents
                 ComponentRegistrar.AddComponents(Assembly.GetExecutingAssembly());
-                ComponentRegistrar.LoadOnInit(0, Assembly.GetExecutingAssembly());
+                ComponentRegistrar.LoadOnInit((int)Session.Groups.Init, Assembly.GetExecutingAssembly());
             }
             catch (Exception error)
             {

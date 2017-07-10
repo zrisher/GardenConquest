@@ -10,4 +10,4 @@ using System.Reflection;
 // Major, Minor, and Build should be set in VersionInfo.cs
 // VersionInfo.cs should be set to not compile.
 // Revision is set by se_mod_builder in VersionInfo - User.cs with the rest of the version.
-[assembly: AssemblyVersion("0.0.3.0")]
+[assembly: AssemblyVersion("0.0.4.0")]

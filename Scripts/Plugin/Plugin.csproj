@@ -152,12 +152,12 @@
     <Compile Include="Messages\Archive\Messages\Responses\RevealedGridsResponse.cs" />
     <Compile Include="Messages\Archive\Messages\Responses\RevealResponse.cs" />
     <Compile Include="Messages\Archive\Messages\Responses\SettingsResponse.cs" />
-    <Compile Include="Messages\MessageDomain.cs" />
     <Compile Include="Messages\MessageType.cs" />
     <Compile Include="Messages\Requests\LoginRequest.cs" />
     <Compile Include="Messages\Requests\RequestBase.cs" />
     <Compile Include="Messages\Responses\LoginResponse.cs" />
     <Compile Include="Messages\Responses\ResponseBase.cs" />
+    <Compile Include="Messages\Serializer.cs" />
     <Compile Include="Sessions\ClientSession.cs" />
     <Compile Include="Sessions\ServerSession.cs" />
     <Compile Include="App\Settings.cs" />

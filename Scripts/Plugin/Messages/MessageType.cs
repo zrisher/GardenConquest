@@ -1,9 +1,3 @@
-﻿/*
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace GC.Messages {
 
     public enum MessageType : ushort {
@@ -23,4 +17,3 @@ namespace GC.Messages {
     }
 
 }
-*/

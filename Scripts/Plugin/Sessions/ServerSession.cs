@@ -1,4 +1,3 @@
-﻿/*
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,11 +11,13 @@ using Sandbox.ModAPI;
 
 using VRage;
 using VRage.ObjectBuilders;
+using VRage.Library.Collections;
 using VRage.ModAPI;
 using VRage.Game;
 using VRage.Game.ModAPI;
 using VRage.Game.ObjectBuilders;
 
+/*
 using SEGarden;
 using SEGarden.Extensions;
 using SEGarden.Logging;
@@ -37,18 +38,26 @@ using GC.Tests.Definitions.GridTaxonomy;
 using GC.Tests.Definitions.LootSpawning;
 using GC.World.Blocks;
 using GC.World.Grids;
+*/
 
+using SEPC.Components;
+using SEPC.Components.Attributes;
+using SEPC.Extensions;
+using SEPC.Logging;
+using SEPC.Network.Messaging;
 
 namespace GC.Sessions {
 
-    public class ServerSession : SessionComponent {
+	[IsSessionComponent(RunLocation.Client, groupId: (int)Session.Groups.Sessions, order: RegistrationOrder)]
+	public class ServerSession {
 
-        const ulong FramesBetweenLootSpawns = 60 * 3; //60; // 1 minute
+		public const int RegistrationOrder = 0;
+
+		const ulong FramesBetweenLootSpawns = 60 * 3; //60; // 1 minute
         const uint FramesBetweenSpawnUpdates = 97;
-        const ulong SupportedCPCount =
-            FramesBetweenLootSpawns / FramesBetweenSpawnUpdates; // 37
+        const ulong SupportedCPCount = FramesBetweenLootSpawns / FramesBetweenSpawnUpdates; // 37
 
-        private static Logger Log = new Logger("GC.Sessions.ServerSession");
+        private static Logable Log = new Logable("GC.Sessions");
 
         //private static Action<int, List<long>, List<IMyPlayer>, ControlPoint> rewardDistribution;
         //public static event Action<int, List<long>, List<IMyPlayer>, ControlPoint> RewardsDistributed {
@@ -61,38 +70,31 @@ namespace GC.Sessions {
         //        rewardDistribution(distributed, winningFleets, nearbyPlayers, cp);
         //}
 
-        public Settings Settings;
+        ////public Settings Settings;
         //public List<EnforcedGrid> Grids = new List<EnforcedGrid>();
 
-        private Queue<ControlPoint> CPsToUpdate = new Queue<ControlPoint>();    
-
-        public override String ComponentName {get {return "GCServerSession";}}
-
-        // TODO: tweak update intervals
-        public override Dictionary<uint, Action> UpdateActions {
-            get {
-                return new Dictionary<uint, Action> {
-                    {FramesBetweenSpawnUpdates, UpdateCPs},
-                };
-            }
-        }
+        ////private Queue<ControlPoint> CPsToUpdate = new Queue<ControlPoint>();    
 
         #region Init / Terminate
 
-        public override void Initialize() {
-            Log.Trace("Initializing Server Session", "Initialize");
+        public ServerSession() {
+            Log.Trace("Initializing Server Session");
 
-            if (ModInfo.DebugMode && !RunTests()) {
-                Log.Info("Tests failed, aborting init.", "Initialize");
-                return;
-            }
+			RegisterMessageHandlers();
 
-            if (!Settings.TryLoadOrCreate(out Settings)) {
-                Log.Info("Settings load failed, aborting init.", "Initialize");
-                return;
-            }
 
-            Settings.ControlPoints.ForEach(x => x.Initialize());
+
+            ////if (ModInfo.DebugMode && !RunTests()) {
+            ////    Log.Info("Tests failed, aborting init.", "Initialize");
+            ////    return;
+            ////}
+
+            ////if (!Settings.TryLoadOrCreate(out Settings)) {
+            ////    Log.Info("Settings load failed, aborting init.", "Initialize");
+            ////    return;
+            ////}
+
+            ////Settings.ControlPoints.ForEach(x => x.Initialize());
 
             //Log.Trace("Registering concealment manager", "Initialize");
             //Manager = new ConcealmentManager();
@@ -114,21 +116,20 @@ namespace GC.Sessions {
             //GridEnforcer.OnCleanupTimerEnd += eventCleanupTimerEnd;
             //ControlPoint.OnRewardsDistributed += notifyPlayersOfCPResults;
 
-
-            base.Initialize();
-            Log.Trace("Finished Initializing Server Session", "Initialize");
+            Log.Trace("Finished Initializing Server Session");
         }
 
-        public override void Terminate() {
-            Log.Trace("Terminating Server Session", "Terminate");
+		[OnSessionClose]
+        void Terminate() {
+            Log.Trace("Terminating Server Session");
 
-            Log.Trace("Saving settings", "Initialize");
+            ////Log.Trace("Saving settings", "Initialize");
             //Settings.Instance.Save();
 
             //Log.Trace("Terminating concealment manager", "Terminate");
             //Manager.Terminate();
 
-            Log.Trace("Terminating server messenger", "Terminate");
+            ////Log.Trace("Terminating server messenger", "Terminate");
             //if (Messenger != null)
                // Messenger.Disabled = true;
 
@@ -144,11 +145,11 @@ namespace GC.Sessions {
             //m_SaveTimer = null;
 
             //Instance = null;
-            base.Terminate();
-            Log.Trace("Finished Terminating Server Session", "Terminate");
+            Log.Trace("Finished Terminating Server Session");
 
         }
 
+		/*
         private bool RunTests() {
             return Specification.RunSpecTests(
                 "GardenConquest Server",
@@ -168,14 +169,8 @@ namespace GC.Sessions {
                 }             
             );
         }
+		*/
 
-        private void RegisterMessagesAndHandlers() {
-            Log.Trace("Registering message handlers and ctrs", "Initialize");
-            GardenGateway.Messages.AddConstructor((ushort)MessageType.LoginRequest, (bytes) => { return new LoginRequest(); });
-            GardenGateway.Messages.AddHandler((ushort)MessageDomain.Server, (ushort)MessageType.LoginRequest, TestHandle);
-            //Messenger.RegisterHandler<LoginRequest>(
-            //    MessageType.LoginRequest, HandleLogin);
-        }
 
         #endregion
         #region Updates
@@ -183,7 +178,9 @@ namespace GC.Sessions {
         /// <summary>
         /// Updates CP spawns, distributes one per frame
         /// </summary>
-        private void UpdateCPs() {
+		[OnSessionUpdate(FramesBetweenSpawnUpdates)]
+        void UpdateCPs() {
+			/*
             if (CPsToUpdate.Count > 0) {
                 CPsToUpdate.Dequeue().UpdateSpawns();
             }
@@ -191,21 +188,30 @@ namespace GC.Sessions {
             if (UpdateManager.Frame % FramesBetweenLootSpawns == 0) {
                 Settings.ControlPoints.ForEach(x => CPsToUpdate.Enqueue(x));
             }
+			*/
         }
 
-        #endregion
-        #region Replies
+		#endregion
+		#region Message Handlers
 
-        private void HandleLogin(Messages.Requests.LoginRequest request) {
+		void RegisterMessageHandlers()
+		{
+			Log.Entered();
+			HandlerRegistrar.Register(Session.MessageDomain, (ushort)Messages.MessageType.LoginRequest, HandleLoginRequest);
+		}
 
-        }
+		void HandleLoginRequest(BitStream data, ulong senderId) {
+			Log.Entered();
+			string content = data.ReadString();
+			Log.Debug($"Received Login Request from '{senderId}' with content '{content}'");
 
-        private void TestHandle(SEGarden.Messaging.MessageBase msg) {
-            Log.Trace("Received message!", "TestHandle");
-        }
+			BitStream stream = new BitStream();
+			stream.ResetWrite();
+			stream.WriteString("This is 249er, we read you loud and clear Breaker.");
+			Messenger.SendToPlayer(stream, Session.MessageDomain, (ushort)Messages.MessageType.LoginResponse, senderId);
+		}
 
         #endregion
     }
 
 }
-*/

@@ -3,15 +3,20 @@ using SEPC.Logging;
 using SEPC.Reflection;
 
 using VRage.Sync;
+using SEPC.Components;
 
 namespace GC
 {
-    [IsSessionComponent]
+    [IsSessionComponent(groupId: (int)Groups.Init)]
     class Session
     {
-        private Logable Log = new Logable("GC");
+		public enum Groups { Init, Sessions }
 
-        public Session()
+		public static readonly ushort MessageDomain = (ushort)"GC".GetHashCode();
+
+		private static readonly Logable Log = new Logable("GC");
+
+		public Session()
         {
             // Only load if the steam version has been loaded too.
             var steamComponent = ReflectionHelper.FindModSessionComponent("GardenConquest", 450540708, "Steam", "GC.Notify");
@@ -20,10 +25,9 @@ namespace GC
 
             Log.Log("GC steam component found, loading mod.");
 
-            Log.Trace("Registering session components abcd");
+            Log.Trace("Registering session components");
+			ComponentSession.RegisterComponentGroup((int)Groups.Sessions);
             //UpdateManager.RegisterSessionComponent(new ServerTestSession());
-            //UpdateManager.RegisterSessionComponent(new ServerSession(), RunLocation.Server);
-            //UpdateManager.RegisterSessionComponent(new ClientSession(), RunLocation.Client);
 
             Log.Trace("Registering entity components");
             //UpdateManager.RegisterEntityComponent(

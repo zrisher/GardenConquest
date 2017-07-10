@@ -1,65 +1,52 @@
-﻿/*
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-using SEGarden;
-using SEGarden.Logging;
-using SEGarden.Logic;
-//using SEGarden.Notifications;
+using VRage.Library.Collections;
 
-using GC.Messages.Requests;
+using SEPC.Components;
+using SEPC.Components.Attributes;
+using SEPC.Extensions;
+using SEPC.Logging;
+using SEPC.Network.Messaging;
 
 namespace GC.Sessions {
 
-    public class ClientSession : SessionComponent {
+	[IsSessionComponent(RunLocation.Client, groupId: (int)Session.Groups.Sessions, order: RegistrationOrder)]
+    public class ClientSession {
 
-        private static Logger Log = new Logger("GC.Sessions.ClientSession");
+		const int RegistrationOrder = ServerSession.RegistrationOrder + 1;
+		static readonly Logable Log = new Logable("GC.Sessions");
 
-        public static ClientSession Instance;
+        ////public static ClientSession Static;
         //public static ClientMessageHandler Messenger;
-        public Settings Settings;
+        ////public Settings Settings;
         //public ulong LocalSteamId;
 
-        public override string ComponentName { 
-            get { return "GCClientSession"; } 
+        public ClientSession() {
+            Log.Trace("Initializing Client Session");
+			RegisterMessageHandlers();
+			////GardenGateway.Commands.addCommands(Commands.FullTree);
+			//Messenger = new ClientMessageHandler();
+			////new LoginRequest().SendToServer();
+			//new SettingsRequest().SendToServer();
+			//m_Player = MyAPIGateway.Session.Player;
+			////Static = this;
+			SendLoginRequest();
+			Log.Trace("Finished Initializing Client Session");
         }
 
-        public override Dictionary<uint, Action> UpdateActions {
-            get {
-                var actions = base.UpdateActions;
-                //actions.Add(150, UpdateLojackWarning);
-                return actions;
-            }
-        }
-
-        public override void Initialize() {
-            Log.Trace("Initializing Client Session", "Initialize");
-            GardenGateway.Commands.addCommands(Commands.FullTree);
-            //Messenger = new ClientMessageHandler();
-            new LoginRequest().SendToServer();
-            //new SettingsRequest().SendToServer();
-            //m_Player = MyAPIGateway.Session.Player;
-  
-            Instance = this;
-            base.Initialize();
-            Log.Trace("Finished Initializing Client Session", "Initialize");
-        }
-
-        public override void Terminate() {
-            Log.Trace("Terminating Client Session", "Terminate");
-            //Messenger = null;
-            // m_Player = null
-
-            Instance = null;
-            base.Terminate();
-            Log.Trace("Finished Terminate Client Session", "Terminate");
-        }
-
-        private void HandleLoginResponse() { 
+		[OnSessionClose]
+        void Terminate() {
+            Log.Trace("Terminating Client Session");
+			//Messenger = null;
+			// m_Player = null
+			////Static = null;
+            Log.Trace("Finished Terminating Client Session");
         }
 
 
+		[OnSessionUpdate(150)]
         private void UpdateLojackWarning()
         {
             // if (m_Player.Controller.ControlledEntity is InGame.IMyShipController) {
@@ -71,11 +58,29 @@ namespace GC.Sessions {
             //}
         }
 
+		void RegisterMessageHandlers()
+		{
+			Log.Entered();
+			HandlerRegistrar.Register(Session.MessageDomain, (ushort)Messages.MessageType.LoginResponse, HandleLoginResponse);
+		}
 
+		void HandleLoginResponse(BitStream data, ulong senderId)
+		{
+			Log.Entered();
+			string content = data.ReadString();
+			Log.Debug($"Received Login Response with content '{content}'");
+		}
 
-    }
+		void SendLoginRequest()
+		{
+			Log.Entered();
+			BitStream stream = new BitStream();
+			stream.ResetWrite();
+			stream.WriteString("Breaker breaker come in.");
+			Messenger.SendToServer(stream, Session.MessageDomain, (ushort)Messages.MessageType.LoginRequest);
+		}
+	}
 }
-*/
 
 #region Make Requests
 /*
