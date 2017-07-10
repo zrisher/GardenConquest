@@ -203,7 +203,7 @@ namespace GC.Sessions {
 		void HandleLoginRequest(BitStream data, ulong senderId) {
 			Log.Entered();
 			string content = data.ReadString();
-			Log.Debug($"Received Login Request from '{senderId}' with content '{content}'");
+			Log.Log($"Received Login Request from '{senderId}' with content '{content}'");
 
 			BitStream stream = new BitStream();
 			stream.ResetWrite();

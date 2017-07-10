@@ -68,7 +68,7 @@ namespace GC.Sessions {
 		{
 			Log.Entered();
 			string content = data.ReadString();
-			Log.Debug($"Received Login Response with content '{content}'");
+			Log.Log($"Received Login Response with content '{content}'");
 		}
 
 		void SendLoginRequest()
