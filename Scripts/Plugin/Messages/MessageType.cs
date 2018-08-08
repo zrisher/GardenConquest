@@ -13,7 +13,11 @@ namespace GC.Messages {
         StopGridRequest,
         StopGridResponse,
         ViolationsRequest,
-        ViolationsResponse
-    }
+        ViolationsResponse,
+		GridTaxonomyChangeRequest,
+		GridTaxonomyChangeResponse,
+		GridTaxonomyRequest,
+		GridTaxonomyResponse,
+	}
 
 }

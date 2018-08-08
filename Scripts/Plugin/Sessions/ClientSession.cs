@@ -1,3 +1,4 @@
+/*
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,12 +28,13 @@ namespace GC.Sessions {
             Log.Trace("Initializing Client Session");
 			RegisterMessageHandlers();
 			////GardenGateway.Commands.addCommands(Commands.FullTree);
-			//Messenger = new ClientMessageHandler();
-			////new LoginRequest().SendToServer();
+
+			SendLoginRequest();
 			//new SettingsRequest().SendToServer();
+
 			//m_Player = MyAPIGateway.Session.Player;
 			////Static = this;
-			SendLoginRequest();
+
 			Log.Trace("Finished Initializing Client Session");
         }
 
@@ -64,12 +66,7 @@ namespace GC.Sessions {
 			HandlerRegistrar.Register(Session.MessageDomain, (ushort)Messages.MessageType.LoginResponse, HandleLoginResponse);
 		}
 
-		void HandleLoginResponse(BitStream data, ulong senderId)
-		{
-			Log.Entered();
-			string content = data.ReadString();
-			Log.Log($"Received Login Response with content '{content}'");
-		}
+
 
 		void SendLoginRequest()
 		{
@@ -79,9 +76,16 @@ namespace GC.Sessions {
 			stream.WriteString("Breaker breaker come in.");
 			Messenger.SendToServer(stream, Session.MessageDomain, (ushort)Messages.MessageType.LoginRequest);
 		}
+
+		void HandleLoginResponse(BitStream data, ulong senderId)
+		{
+			Log.Entered();
+			string content = data.ReadString();
+			Log.Log($"Received Login Response with content '{content}'");
+		}
 	}
 }
-
+*/
 #region Make Requests
 /*
 

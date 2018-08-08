@@ -1,4 +1,4 @@
-﻿/*
+/*
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -259,7 +259,7 @@ namespace GC.World.Grids {
 
     }
 }
-*/
+
 /*
 private void UpdateSupport() {
 	UpdateBasicSupport();

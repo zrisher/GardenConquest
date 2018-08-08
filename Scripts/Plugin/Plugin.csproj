@@ -41,6 +41,9 @@
     <Reference Include="Sandbox.Game">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Game.dll</HintPath>
     </Reference>
+    <Reference Include="Sandbox.Graphics">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Graphics.dll</HintPath>
+    </Reference>
     <Reference Include="SEPC">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\SpaceEngineersPluginLoader\plugin\Rynchodon.SEPC\SEPC.dll</HintPath>
     </Reference>
@@ -100,11 +103,21 @@
     <Compile Include="App\BlockTaxonomy\BlockTypeCategory.cs" />
     <Compile Include="App\GridOwnership\Fleet.cs" />
     <Compile Include="App\GridOwnership\GridOwner.cs" />
+    <Compile Include="App\GridTaxonomy\Extensions\BitStreamExtensions.cs" />
+    <Compile Include="App\GridTaxonomy\Messages\MessageBase.cs" />
+    <Compile Include="App\GridTaxonomy\Messages\Request.cs" />
+    <Compile Include="App\GridTaxonomy\Messages\Response.cs" />
+    <Compile Include="App\GridTaxonomy\Messages\TaxonomyChangeRequest.cs" />
+    <Compile Include="App\GridTaxonomy\Messages\TaxonomyChangeResponse.cs" />
+    <Compile Include="App\GridTaxonomy\Sessions\ClientSession.cs" />
     <Compile Include="App\GridTaxonomy\Condition.cs" />
-    <Compile Include="App\GridTaxonomy\ConditionValues\ConditionValueBase.cs" />
-    <Compile Include="App\GridTaxonomy\ConditionValues\CountValue.cs" />
-    <Compile Include="App\GridTaxonomy\ConditionValues\GridTypeValue.cs" />
+    <Compile Include="App\GridTaxonomy\ConditionComparable.cs" />
+    <Compile Include="App\GridTaxonomy\Screens\EditorBase.cs" />
+    <Compile Include="App\GridTaxonomy\Screens\EditorScreen.cs" />
+    <Compile Include="App\GridTaxonomy\Screens\EditorScreenContent.cs" />
+    <Compile Include="App\GridTaxonomy\Screens\EditorScreenNew.cs" />
     <Compile Include="App\GridTaxonomy\Node.cs" />
+    <Compile Include="App\GridTaxonomy\Sessions\ServerSession.cs" />
     <Compile Include="App\LootSpawning\ControlPoint.cs" />
     <Compile Include="App\LootSpawning\LootCrateCount.cs" />
     <Compile Include="App\LootSpawning\LootCrateType.cs" />
@@ -116,8 +129,6 @@
     <Compile Include="Definitions\GridTaxonomy\ConditionValueDefinition.cs" />
     <Compile Include="Definitions\GridTaxonomy\GridType.cs" />
     <Compile Include="Definitions\GridTaxonomy\NodeDefinition.cs" />
-    <Compile Include="Definitions\GridTaxonomy\OperatorType.cs" />
-    <Compile Include="Definitions\GridTaxonomy\StoredValueType.cs" />
     <Compile Include="Definitions\LootSpawning\ControlPointDefinition.cs" />
     <Compile Include="Definitions\LootSpawning\LootCrateCountDefinition.cs" />
     <Compile Include="Definitions\LootSpawning\LootCrateTypeDefinition.cs" />
@@ -174,13 +185,19 @@
     <Compile Include="Tests\Definitions\LootSpawning\LootDropDefinitionSpec.cs" />
     <Compile Include="Tests\Definitions\SettingsDefinitionSpec.cs" />
     <Compile Include="Tests\SettingsSpec.cs" />
-    <Compile Include="World\Blocks\Classifier.cs" />
-    <Compile Include="World\Blocks\SupportableBlock.cs" />
-    <Compile Include="World\Grids\EnforcedGrid.cs" />
-    <Compile Include="World\Grids\GridUpkeepManager.cs" />
-    <Compile Include="World\Grids\LootCrate.cs" />
+    <Compile Include="App\Enforcement\Classifier.cs" />
+    <Compile Include="App\Enforcement\SupportableBlock.cs" />
+    <Compile Include="World\Grids\GridType.cs" />
+    <Compile Include="World\Types\CubeBlockType.cs" />
+    <Compile Include="World\Types\DefinedObjectType.cs" />
+    <Compile Include="App\Enforcement\EnforcedGrid.cs" />
+    <Compile Include="App\Enforcement\GridUpkeepManager.cs" />
+    <Compile Include="App\LootSpawning\LootCrate.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Session.cs" />
+    <Compile Include="World\Inventory\ItemCount.cs" />
+    <Compile Include="World\Inventory\ItemCountCollection.cs" />
+    <Compile Include="World\Types\PhysicalItemType.cs" />
     <None Include="..\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </None>
@@ -188,21 +205,21 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>SEModBuilder git-version
+    <PreBuildEvent>@REM SEModBuilder git-version
 </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>SEModBuilder kill-se
-SEModBuilder build-models
-SEModBuilder distribute-steam
+    <PostBuildEvent>@REM SEModBuilder kill-se
+@REM SEModBuilder build-models
+@REM SEModBuilder distribute-steam
 
-if $(ConfigurationName) == Release ( 
-  PluginManager ..\..\..\..\..\plugin.json publish=True
-  SEModBuilder start-se
-) else (
-  PluginManager ..\..\..\..\..\plugin.json publish=True
-  SEModBuilder start-se
-)
+@REM if $(ConfigurationName) == Release ( 
+@REM   PluginManager ..\..\..\..\..\plugin.json publish=True
+@REM   SEModBuilder start-se
+@REM ) else (
+@REM   PluginManager ..\..\..\..\..\plugin.json
+@REM   SEModBuilder start-se
+@REM )
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -53,7 +53,8 @@ namespace GC.Sessions {
 
 		public const int RegistrationOrder = 0;
 
-		const ulong FramesBetweenLootSpawns = 60 * 3; //60; // 1 minute
+		const uint SecondsBetweenLootSpawns = 3; //60;
+		const ulong FramesBetweenLootSpawns = 60 * SecondsBetweenLootSpawns;
         const uint FramesBetweenSpawnUpdates = 97;
         const ulong SupportedCPCount = FramesBetweenLootSpawns / FramesBetweenSpawnUpdates; // 37
 
@@ -147,27 +148,25 @@ namespace GC.Sessions {
 
         }
 
-		/*
-        private bool RunTests() {
-            return Specification.RunSpecTests(
-                "GardenConquest Server",
-                new List<Specification>{
-                    new BlockTypeCategoryDefinitionSpec(),
-                    new BlockTypeDefinitionSpec(),
-                    new ConditionDefinitionSpec(),
-                    new ConditionValueDefinitionSpec(),
-                    new ControlPointDefinitionSpec(),
-                    new LootCrateCountDefinitionSpec(),
-                    new LootCrateDefinitionSpec(),
-                    new ControlPointSpec(),
-                    new LootDropDefinitionSpec(),
-                    new NodeDefinitionSpec(),
-                    new SettingsDefinitionSpec(),
-                    new SettingsSpec(),              
-                }             
-            );
-        }
-		*/
+//        private bool RunTests() {
+//            return Specification.RunSpecTests(
+//                "GardenConquest Server",
+//                new List<Specification>{
+//                    new BlockTypeCategoryDefinitionSpec(),
+//                    new BlockTypeDefinitionSpec(),
+//                    new ConditionDefinitionSpec(),
+//                    new ConditionValueDefinitionSpec(),
+//                    new ControlPointDefinitionSpec(),
+//                    new LootCrateCountDefinitionSpec(),
+//                    new LootCrateDefinitionSpec(),
+//                    new ControlPointSpec(),
+//                    new LootDropDefinitionSpec(),
+//                    new NodeDefinitionSpec(),
+//                    new SettingsDefinitionSpec(),
+//                    new SettingsSpec(),              
+//                }             
+//            );
+//        }
 
 
         #endregion
@@ -176,18 +175,16 @@ namespace GC.Sessions {
         /// <summary>
         /// Updates CP spawns, distributes one per frame
         /// </summary>
-		[OnSessionUpdate(FramesBetweenSpawnUpdates)]
-        void UpdateCPs() {
-			/*
-            if (CPsToUpdate.Count > 0) {
-                CPsToUpdate.Dequeue().UpdateSpawns();
-            }
-
-            if (UpdateManager.Frame % FramesBetweenLootSpawns == 0) {
-                Settings.ControlPoints.ForEach(x => CPsToUpdate.Enqueue(x));
-            }
-			*/
-        }
+//		[OnSessionUpdate(FramesBetweenSpawnUpdates)]
+//        void UpdateCPs() {
+//            if (CPsToUpdate.Count > 0) {
+//                CPsToUpdate.Dequeue().UpdateSpawns();
+//            }
+//
+//            if (UpdateManager.Frame % FramesBetweenLootSpawns == 0) {
+//                Settings.ControlPoints.ForEach(x => CPsToUpdate.Enqueue(x));
+//            }
+//        }
 
 		#endregion
 		#region Message Handlers

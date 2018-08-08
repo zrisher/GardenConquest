@@ -1,105 +1,105 @@
-﻿/*
+/*
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using VRage;
+using VRage.Library.Collections;
 
-using GC.Definitions.GridTaxonomy;
+using SEPC.Extensions;
+
 using GC.World.Grids;
+
 
 namespace GC.App.GridTaxonomy {
 
     public class Node {
 
+		enum NodeType { Unknown, Leaf, Tree }
+
+		NodeType NType;
+
         // If this is a leaf
-        String ClassName;
+        String GridClassName;
 
         // If this is a tree
         Condition Condition;
-        Node LeftBranch;
-        Node RightBranch;
+        Node Left;
+        Node Right;
 
-        public Node(String className) {
-            if (className == null || className == "")
-                throw new ArgumentException("Empty className");
+		public Node() { }
 
-            ClassName = className;
+		public Node(String gridClassName) {
+			Exceptions.ThrowIf<ArgumentException>(String.IsNullOrEmpty(gridClassName), "Empty gridClassName");
+
+			NType = NodeType.Leaf;
+			GridClassName = gridClassName;
         }
 
         public Node(Condition condition, Node leftBranch, Node rightBranch) {
-            if (condition == null)
-                throw new ArgumentException("Null condition");
-            if (leftBranch == null)
-                throw new ArgumentException("Null leftBranch");
-            if (rightBranch == null)
-                throw new ArgumentException("Null rightBranch");
+			Exceptions.ThrowIf<ArgumentException>(condition == null, "Null condition");
+			Exceptions.ThrowIf<ArgumentException>(leftBranch == null, "Null leftBranch");
+			Exceptions.ThrowIf<ArgumentException>(rightBranch == null, "Null rightBranch");
 
-            Condition = condition;
-            LeftBranch = leftBranch;
-            RightBranch = rightBranch;
+			NType = NodeType.Tree;
+			Condition = condition;
+            Left = leftBranch;
+            Right = rightBranch;
         }
 
-        public Node(NodeDefinition definition) {
-            if (!String.IsNullOrWhiteSpace(definition.ClassName)) {
-                ClassName = definition.ClassName;
-            }
-            else {
-                if (definition.Condition == null)
-                    throw new ArgumentException("Null condition");
-                if (definition.LeftBranch == null)
-                    throw new ArgumentException("Null leftBranch");
-                if (definition.RightBranch == null)
-                    throw new ArgumentException("Null rightBranch");
+		public void Serialize(BitStream stream)
+		{
+			if (stream.Reading)
+				stream.WriteByte((byte)NType);
+			else
+				NType = (NodeType)stream.ReadByte();
 
-                Condition = new Condition(definition.Condition);
-                LeftBranch = new Node(definition.LeftBranch);
-                RightBranch = new Node(definition.RightBranch);
-            }
-        }
+			// Only serializes the values matching its type
+			switch (NType)
+			{
+				case NodeType.Leaf:
+					stream.Serialize(ref GridClassName);
+					break;
+				case NodeType.Tree:
+					if (stream.Reading)
+					{
+						Condition = new Condition();
+						Left = new Node();
+						Right = new Node();
+					}
+					Condition.Serialize(stream);
+					Left.Serialize(stream);
+					Right.Serialize(stream);
+					break;
+				default:
+					throw new InvalidOperationException("Unexpected stored type");
+			}
+		}
 
-        public NodeDefinition GetDefinition() {
-            NodeDefinition result = new NodeDefinition();
 
-            if (!String.IsNullOrWhiteSpace(ClassName)) {
-                result.ClassName = ClassName;
-            }
-            else {
-                result.Condition = Condition.GetDefinition();
-                result.LeftBranch = LeftBranch.GetDefinition();
-                result.RightBranch = RightBranch.GetDefinition();
-            }
-
-            return result;
-        }
-
-        public String ToString(String indent = "") {
-            if (!String.IsNullOrWhiteSpace(ClassName)) {
-                return indent + ClassName;
+		public String ToString(String indent = "") {
+            if (!String.IsNullOrWhiteSpace(GridClassName)) {
+                return indent + GridClassName;
             }
             else {
                 indent += "  ";
                 return indent + Condition.ToString() + "\r\n"
-                     + indent + LeftBranch.ToString(indent) + "\r\n"
-                     + indent + RightBranch.ToString(indent);
+                     + indent + Left.ToString(indent) + "\r\n"
+                     + indent + Right.ToString(indent);
             }
         }
 
         /// <summary>
         /// Navigates this branch given a grid and returns the resulting Class
         /// </summary>
-        public String Classify(EnforcedGrid grid) {
-            if (ClassName != null)
-                return ClassName;
-
-            if (Condition.Evaluate(grid))
-                return LeftBranch.Classify(grid);
-            else
-                return RightBranch.Classify(grid);            
-        }
-
-    }
+//        public String Classify(EnforcedGrid grid) {
+//            if (GridClassName != null)
+//                return GridClassName;
+//
+//            if (Condition.Evaluate(grid))
+//                return LeftBranch.Classify(grid);
+//            else
+//                return RightBranch.Classify(grid);            
+//        }
+//    }
 
 }
 */
